@@ -417,7 +417,7 @@ ai:
   
   model: "deepseek/deepseek-chat"
 
-  api_key: "sk-sHZXRYr96hxVwfzZvQm2Efe9ONjXtqzkIV70m70XVEeVtzRq"                       # API Key（建议使用环境变量 AI_API_KEY）
+  api_key: "sk-sHZXRYr96hxVwfzZvQm2Efe9ONjXtqzkIV70m70XVEeVtzRqabcgim"                       # API Key（建议使用环境变量 AI_API_KEY）
   
   api_base: "https://yourapi.art/v1"                      # 自定义 API 端点（可选，大多数情况留空）
                                     # 示例: https://api.openai.com/v1（自建代理或兼容接口）

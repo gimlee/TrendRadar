@@ -1963,7 +1963,7 @@ Templates support two placeholders:
    **Configuration Method:**
    Add the following to GitHub Secrets (or `.env` / `config.yaml`):
    - `AI_API_KEY`: Your API Key (Supports DeepSeek, OpenAI, etc.)
-   - `AI_PROVIDER`: Provider name (e.g., `deepseek`, `openai`)
+   - `AI_MODEL`: Model identifier (must be `provider/model`, e.g. `deepseek/deepseek-chat`)
 
    That's it! No complex deployment needed. You'll see the smart analysis report in the next push.
 
@@ -2673,13 +2673,19 @@ current directory/
 
    If you encounter **config.yaml modifications not taking effect** in NAS or other Docker environments, you can directly override configs via environment variables:
 
+   > Notes:
+   > - The Python app does not parse `.env` directly; it reads the actual process environment
+   > - `docker compose up -d` reads `docker/.env` first, then injects supported values into the container
+   > - Only environment variables explicitly supported by the code can override matching config fields; not every `config.yaml` key has an env counterpart
+
    | Environment Variable | Corresponding Config | Example Value | Description |
    |---------------------|---------------------|---------------|-------------|
    | `WEBSERVER_PORT` | - | `8080` | Web server port |
    | `FEISHU_WEBHOOK_URL` | `notification.channels.feishu.webhook_url` | `https://...` | Feishu Webhook (multi-account use `;` separator) |
    | `AI_ANALYSIS_ENABLED` | `ai_analysis.enabled` | `true` / `false` | Enable AI analysis (v5.0.0 new) |
    | `AI_API_KEY` | `ai.api_key` | `sk-xxx...` | AI API Key (shared by ai_analysis and ai_translation) |
-   | `AI_PROVIDER` | `ai.provider` | `deepseek` / `openai` / `gemini` | AI provider (v5.0.0 new) |
+   | `AI_MODEL` | `ai.model` | `deepseek/deepseek-chat` | AI model identifier (`provider/model`) |
+   | `AI_API_BASE` | `ai.api_base` | `https://api.openai.com/v1` | Custom OpenAI-compatible API base URL |
    | `S3_*` | `storage.remote.*` | - | Remote storage config (5 params) |
 
    **Config Priority**: Environment Variables > config.yaml

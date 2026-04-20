@@ -425,7 +425,7 @@
 **🔧 配置优化**
 
 - **频率词配置增强**：新增 `[组别名]` 语法，支持 `#` 注释行，配置更清晰（感谢 [@songge8](https://github.com/sansan0/TrendRadar/issues/752) 提出的建议）
-- **环境变量支持**：AI 分析相关配置支持环境变量覆盖（`AI_API_KEY`、`AI_PROVIDER` 等）
+- **环境变量支持**：AI 分析相关配置支持环境变量覆盖（`AI_API_KEY`、`AI_MODEL`、`AI_API_BASE` 等）
 
 > 💡 详细配置教程见 [让 AI 帮我分析热点](#12-让-ai-帮我分析热点)
 
@@ -2022,7 +2022,7 @@ ai_translation:
    **配置方法：**
    在 GitHub Secrets (或 `.env` / `config.yaml`) 中添加：
    - `AI_API_KEY`: 你的 API Key（支持 DeepSeek、OpenAI 等）
-   - `AI_PROVIDER`: 服务商名称（如 `deepseek`, `openai`）
+   - `AI_MODEL`: 模型标识（格式必须是 `provider/model`，例如 `deepseek/deepseek-chat`）
 
    就这样，无需复杂部署，下次推送时你就会看到智能分析报告了。
 
@@ -2722,7 +2722,12 @@ TrendRadar 提供两个独立的 Docker 镜像，可根据需求选择部署：
 
    **⚙️ 环境变量覆盖机制（v3.0.5+）**
 
-   `.env` 文件中的环境变量会覆盖 `config.yaml` 中的对应配置：
+   Docker 部署时，`docker/.env` 中被注入到容器里的环境变量，会覆盖 `config.yaml` 中的对应配置：
+
+   > 说明：
+   > - Python 代码不会直接解析 `.env` 文件，而是读取容器进程里的环境变量
+   > - `docker compose up -d` 会先读取 `docker/.env`，再把这些值注入容器
+   > - 只有代码里显式支持的环境变量才会覆盖对应配置，并不是 `config.yaml` 任意字段都能被 `.env` 覆盖
 
    | 环境变量 | 对应配置 | 示例值 | 说明 |
    |---------|---------|-------|------|
@@ -2730,7 +2735,8 @@ TrendRadar 提供两个独立的 Docker 镜像，可根据需求选择部署：
    | `FEISHU_WEBHOOK_URL` | `notification.channels.feishu.webhook_url` | `https://...` | 飞书 Webhook（多账号用 `;` 分隔） |
    | `AI_ANALYSIS_ENABLED` | `ai_analysis.enabled` | `true` / `false` | 是否启用 AI 分析（v5.0.0 新增） |
    | `AI_API_KEY` | `ai.api_key` | `sk-xxx...` | AI API Key（ai_analysis 和 ai_translation 共享） |
-   | `AI_PROVIDER` | `ai.provider` | `deepseek` / `openai` / `gemini` | AI 提供商 |
+   | `AI_MODEL` | `ai.model` | `deepseek/deepseek-chat` | AI 模型标识（格式：`provider/model`） |
+   | `AI_API_BASE` | `ai.api_base` | `https://api.openai.com/v1` | 自定义 OpenAI 兼容接口地址 |
    | `S3_*` | `storage.remote.*` | - | 远程存储配置（5 个参数） |
 
    **配置优先级**：环境变量 > config.yaml
