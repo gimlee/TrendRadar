@@ -74,3 +74,9 @@ fd45eadc5574   docker-trendradar       "/entrypoint.sh"          2 minutes ago  
 发现监听的地址为127.0.0.1，不能外网访问，怎么配置才能允许外网访问？
 
 
+# P12
+网页上显示新闻的条数的规则是什么？
+我现在report.mode=daily,为什么现在看到的内容和之前一个小时看到的内容的为什么不一样？
+![alt text](image.png)
+我都设置了daily了，不应该看到今天所有AI分析结果的匹配的新闻吗？
+
