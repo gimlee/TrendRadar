@@ -54,3 +54,23 @@ output目录是不是也不需要？
 “国际金融与宏观政策” 则是国际金融市场相关，以及一些宏观政策。
 并调整当前序号。
 请修改，让AI模式下，更准确，让我看到我想要的信息。
+
+# P10
+report.mode为daily时，会每次都抓取全量新闻吗？
+report.mode为daily | current | incremental 时，它到底是怎么抓取新闻的？
+是不是说为daily时，每次都得把当天所有的新闻都AI分析一遍，再放到前端展示？
+为current时，只分析当前的热点新闻，并展示？
+为incremental时，只分析增量新闻（对比已有的），并展示？
+那是不是说为daily时，每次都存了当天调度发生时的所有新闻，所以存储量会比较大？
+
+# P11
+report.display_mode是不是不影响页面展示，就是http://localhost:8080/#tab-0展示的内容。
+我看display_mode配置的keyword,但filter.method=ai，页面展示的tab为ai分类。
+所以这个display_mode影响的是推送给用户聊天工具(飞书等)的显示方式？
+
+# P12
+docker部署后，ps查看：
+fd45eadc5574   docker-trendradar       "/entrypoint.sh"          2 minutes ago   Up 2 minutes   127.0.0.1:8888->8888/tcp                      trendradar
+发现监听的地址为127.0.0.1，不能外网访问，怎么配置才能允许外网访问？
+
+

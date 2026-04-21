@@ -2680,6 +2680,7 @@ current directory/
 
    | Environment Variable | Corresponding Config | Example Value | Description |
    |---------------------|---------------------|---------------|-------------|
+   | `WEBSERVER_HOST` | - | `127.0.0.1` | Host bind address for web server; set `0.0.0.0` to allow remote access |
    | `WEBSERVER_PORT` | - | `8080` | Web server port |
    | `FEISHU_WEBHOOK_URL` | `notification.channels.feishu.webhook_url` | `https://...` | Feishu Webhook (multi-account use `;` separator) |
    | `AI_ANALYSIS_ENABLED` | `ai_analysis.enabled` | `true` / `false` | Enable AI analysis (v5.0.0 new) |
@@ -2844,10 +2845,11 @@ docker rm trendradar
 > 💡 **Web Server Notes**:
 > - Auto-starts in cron mode, access latest report at `http://localhost:8080`
 > - Access historical reports via directory navigation (e.g., `http://localhost:8080/2025-xx-xx/`)
+> - To allow remote access, set `WEBSERVER_HOST=0.0.0.0` in `.env`
 > - Port can be configured in `.env` file with `WEBSERVER_PORT` parameter
 > - Stop manually: `docker exec -it trendradar python manage.py stop_webserver`
 > - Start manually: `docker exec -it trendradar python manage.py start_webserver`
-> - Security: Static files only, limited to output directory, localhost binding only
+> - Security: Static files only, limited to output directory; default is localhost-only, and remote exposure should be protected with firewall / reverse proxy / auth
 
 #### Data Persistence
 

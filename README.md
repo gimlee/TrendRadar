@@ -2731,6 +2731,7 @@ TrendRadar 提供两个独立的 Docker 镜像，可根据需求选择部署：
 
    | 环境变量 | 对应配置 | 示例值 | 说明 |
    |---------|---------|-------|------|
+   | `WEBSERVER_HOST` | - | `127.0.0.1` | Web 服务器宿主机绑定地址；设为 `0.0.0.0` 可允许外网访问 |
    | `WEBSERVER_PORT` | - | `8080` | Web 服务器端口 |
    | `FEISHU_WEBHOOK_URL` | `notification.channels.feishu.webhook_url` | `https://...` | 飞书 Webhook（多账号用 `;` 分隔） |
    | `AI_ANALYSIS_ENABLED` | `ai_analysis.enabled` | `true` / `false` | 是否启用 AI 分析（v5.0.0 新增） |
@@ -2895,10 +2896,11 @@ docker rm trendradar
 > 💡 **Web 服务器说明**：
 > - cron 模式下自动启动，通过浏览器访问 `http://localhost:8080` 查看最新报告
 > - 通过目录导航访问历史报告（如：`http://localhost:8080/2025-xx-xx/`）
+> - 如需允许外网访问，可在 `.env` 中设置 `WEBSERVER_HOST=0.0.0.0`
 > - 端口可在 `.env` 文件中配置 `WEBSERVER_PORT` 参数
 > - 手动停止：`docker exec -it trendradar python manage.py stop_webserver`
 > - 手动启动：`docker exec -it trendradar python manage.py start_webserver`
-> - 安全提示：仅提供静态文件访问，限制在 output 目录，只绑定本地访问
+> - 安全提示：仅提供静态文件访问，限制在 output 目录；默认只绑定本地访问，外网暴露请自行配好防火墙 / 反向代理 / 认证
 
 #### 数据持久化
 
