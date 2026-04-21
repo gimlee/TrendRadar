@@ -12,6 +12,9 @@ vim config/frequency_words.txt
 cd docker
 cp docker-compose-build.yml docker-compose.yml
 
+# 关闭BUILDKIT
+DOCKER_BUILDKIT=0 docker compose build
+docker compose build --no-cache --build-arg http_proxy=http://${hostip}:10808 --build-arg https_proxy=http://${hostip}:10808
 
 构建并启动服务：
 
@@ -26,6 +29,7 @@ docker compose up -d trendradar
 # 选项 C：仅构建并启动 MCP AI 分析服务
 docker compose build trendradar-mcp
 docker compose up -d trendradar-mcp
+
 
 如果你改的是 config/config.yaml，推荐直接执行这一条，让主程序立刻重新跑一遍：
 docker exec trendradar python -m trendradar
