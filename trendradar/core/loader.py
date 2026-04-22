@@ -343,7 +343,11 @@ def _load_filter_config(config_data: Dict) -> Dict:
     # 环境变量兼容：AI_FILTER_ENABLED=true → method=ai
     env_ai_filter = _get_env_bool("AI_FILTER_ENABLED")
 
-    method = filter_cfg.get("method", "keyword")
+    raw_method = str(filter_cfg.get("method", "keyword")).strip().lower()
+    method_aliases = {
+        "none": "all",
+    }
+    method = method_aliases.get(raw_method, raw_method)
     if env_ai_filter is True:
         method = "ai"
 
@@ -353,8 +357,12 @@ def _load_filter_config(config_data: Dict) -> Dict:
         if ai_filter.get("enabled", False):
             method = "ai"
 
+    if method not in {"keyword", "ai", "all"}:
+        print(f"[警告] 未知的 filter.method: {method}，回退到 keyword")
+        method = "keyword"
+
     return {
-        "METHOD": method,  # "keyword" | "ai"
+        "METHOD": method,  # "keyword" | "ai" | "all"
         "PRIORITY_SORT_ENABLED": filter_cfg.get("priority_sort_enabled", False),  # AI 模式标签优先级排序开关
     }
 

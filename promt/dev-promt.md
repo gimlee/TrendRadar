@@ -80,3 +80,43 @@ fd45eadc5574   docker-trendradar       "/entrypoint.sh"          2 minutes ago  
 ![alt text](image.png)
 我都设置了daily了，不应该看到今天所有AI分析结果的匹配的新闻吗？
 
+
+# P13
+当前推送消息是增量推送的吗？哪里配置推送消息的频率？
+
+# P14
+当前配置为什么看不到AI分析区域了？
+
+# P15
+如果所示，界面更改如下：
+![alt text](image-1.png)
+1. 去掉顶部的“TrendRadar"显示动画（鼠标移动过去就会显示）
+2. 把当前排版的三块区域放到上面进行分区展示，方便用户选择，放到搜索框下
+3. 搜索的内容不受区块显示限制
+
+# P16
+怎么重新生成，我看到仍然是旧的?
+## AI回答：
+docker compose up -d --build trendradar
+docker exec -it trendradar python -m trendradar
+
+
+# P17
+如图所示：
+1. 独立展示区有分隔符和大量空白
+![alt text](image-2.png)
+2. 三个独立区块为：热榜、独立、AI分析。没有什么新增区域
+3. 我已经把once.analyze 改成 false，为什么还是看不到 AI分析 区域？
+请修改，保证AI分析区域必须出现。
+
+
+# P18
+ “独立”更名为“独立展示区”
+![alt text](image-3.png)
+如果所示，下方没必要再次显示“独立展示区”
+去掉中间大量空白。
+
+# P19
+1. 请求失败的信息不要放在最上面，放在最下面显示。
+![alt text](image-4.png)
+2. 独立展示区右侧有大量空白区域，把新闻标题压缩了在左侧，要像“热榜”显示区域一样，不要压缩。

@@ -986,13 +986,13 @@ Describe your interests in natural language and let AI automatically classify ne
 - **Score Threshold Control**: Fine-tune push quality with `ai_filter.min_score` — only highly relevant news gets delivered
 - **Auto Fallback**: Automatically falls back to keyword matching if AI filtering fails, ensuring uninterrupted push delivery
 - **Smart Tag Updates**: When interests change, AI evaluates the change magnitude to decide incremental or full reclassification
-- **Flexible Switching**: `filter.method` supports `keyword` (default) and `ai` modes, Timeline can override per time period
+- **Flexible Switching**: `filter.method` supports `keyword` (default), `ai`, and `all` modes, Timeline can override per time period
 - **Per-Period Personalization**: Different time periods can use different keyword files or AI interest descriptions. For example: mornings use a "tech keyword list" for quick filtering, evenings switch to "finance interests" for AI deep filtering
 
 ```yaml
 # config.yaml quick enable example
 filter:
-  method: ai          # keyword (default) | ai
+  method: ai          # keyword (default) | ai | all (no filtering, show all hotlist items)
 ai_filter:
   min_score: 6         # Minimum push score threshold (1-10)
 ```

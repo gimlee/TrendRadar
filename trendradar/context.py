@@ -136,7 +136,7 @@ class AppContext:
 
     @property
     def filter_method(self) -> str:
-        """获取筛选策略: keyword | ai"""
+        """获取筛选策略: keyword | ai | all"""
         return self.config.get("FILTER", {}).get("METHOD", "keyword")
 
     @property

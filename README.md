@@ -1041,13 +1041,13 @@ frequency_words.txt 文件增加了一个【必须词】功能，使用 + 号
 - **分数阈值控制**：通过 `ai_filter.min_score` 精确控制推送质量，只推送高相关度新闻
 - **自动回退保障**：AI 筛选失败时自动回退到关键词匹配，确保推送不中断
 - **智能标签更新**：兴趣变更时 AI 自动评估变化幅度，决定增量或全量重分类
-- **灵活切换**：`filter.method` 支持 `keyword`（默认）和 `ai` 两种模式，Timeline 可按时段覆盖
+- **灵活切换**：`filter.method` 支持 `keyword`（默认）、`ai` 和 `all` 三种模式，Timeline 可按时段覆盖
 - **分时段个性化**：不同时间段可以使用不同的关键词文件或 AI 兴趣描述。例如早上用"科技词库"快速过滤，晚上换成"金融兴趣"做 AI 深度筛选
 
 ```yaml
 # config.yaml 快速启用示例
 filter:
-  method: ai          # keyword（默认）| ai
+  method: ai          # keyword（默认）| ai | all（不过滤，展示全部热榜）
 ai_filter:
   min_score: 6         # 推送最低分数阈值（1-10）
 ```

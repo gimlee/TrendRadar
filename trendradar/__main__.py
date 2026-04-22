@@ -840,6 +840,15 @@ class NewsAnalyzer:
                     id_to_name, title_info, new_titles,
                     mode=mode, global_filters=global_filters, quiet=quiet,
                 )
+        elif self.filter_method == "all":
+            # === 不过滤策略 ===
+            print("[筛选] 使用不过滤策略，展示全部热榜新闻")
+            all_news_group = [{"required": [], "normal": [], "group_key": "全部新闻"}]
+            stats, total_titles = self.ctx.count_frequency(
+                data_source, all_news_group, [],
+                id_to_name, title_info, new_titles,
+                mode=mode, global_filters=[], quiet=quiet,
+            )
         else:
             # === 关键词匹配策略（默认）===
             stats, total_titles = self.ctx.count_frequency(
